@@ -1,8 +1,9 @@
 
 set :application, "iga-node"
 set :repository,  "git@github.com:CircuitLab/#{application}.git"
+set :branch, "master"
 
-set :user, 'deployer'
+set :user, "deployer"
 set :use_sudo, false
 set :deploy_to, "/home/#{user}/apps/#{application}"
 
