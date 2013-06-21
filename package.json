@@ -17,6 +17,5 @@
     "request": "~2.12.0",
     "passport": "~0.1.15",
     "passport-twitter": "~0.1.4"
-    "forever": "~0.10.1"
   }
 }

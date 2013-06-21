@@ -25,7 +25,7 @@ var app = express()
   , listener = process.env.HOST || 'diehard1.local'
   , io = sio.listen(server);
 
-var online  =0;
+var online = 0;
 var mode = "stanby";
 
 passport.serializeUser(function(user, done) {
@@ -96,7 +96,7 @@ io.sockets.on('connection', function(socket) {
     io.sockets.emit('onlineNum', { online: online });
 
     var image_url;
-    if(user.profile_image_url != null){
+    if (user.profile_image_url != null) {
       image_url = user.profile_image_url; //twitter
     } else {
       image_url = 'https://graph.facebook.com/' + user.username + '/picture'; //facebook
@@ -113,7 +113,6 @@ io.sockets.on('connection', function(socket) {
         socket.on('shake', function() {
           sendOSCshake(socket.id);
         });
-
 
         /*
         socket.on('move', function(x, y) {
@@ -172,9 +171,7 @@ io.sockets.on('connection', function(socket) {
 
   socket.on('randunity', function() {
     debug('unity auto');
-    var buf = osc.toBuffer({
-              address: '/auto'
-    });
+    var buf = osc.toBuffer({ address: '/auto' });
     
     sender.send(buf, 0, buf.length, 5000, listener);
   });
@@ -191,18 +188,18 @@ io.sockets.on('connection', function(socket) {
 
 function sendOSCenter(id,file){
   var buf = osc.toBuffer({
-            address: '/enter'
-            , args: [id, 'http://localhost:3000/profiles/' + file]
-  //   , args: [socket.id, 'http://' + listener + ':3000/profiles/' + filename]
-        });
+    address: '/enter',
+    args: [id, 'http://localhost:3000/profiles/' + file]
+    // args: [socket.id, 'http://' + listener + ':3000/profiles/' + filename]
+  });
   debug('enter %s', id);
   sender.send(buf, 0, buf.length, 5000, listener);
 }
 
 function sendOSCshake(id){
    var buf = osc.toBuffer({
-              address: '/shake'
-            , args: id
+      address: '/shake',
+      args: id
    });
    debug('shaken %s', id);
    sender.send(buf, 0, buf.length, 5000, listener);

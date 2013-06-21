@@ -30,10 +30,10 @@
     //$("#header").append($ ("<img src=" + image_url + " width='50' height='50' >")); 
     window.addEventListener('shake', function(e) {
       if( "ready" == throw_state ) {
-        document.body.style.backgroundColor = 'red';
+        document.body.style.backgroundColor = 'black';
         socket.emit('shake', user.id);
         setTimeout(function() {
-          document.body.style.backgroundColor = 'white';
+          document.body.style.backgroundColor = 'black';
           throw_state = "charge";
           charge = 100;
           charge_timer();

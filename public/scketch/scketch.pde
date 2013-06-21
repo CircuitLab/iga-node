@@ -62,7 +62,7 @@ void draw() {
 	}
 	//////////////////////////charge gage graph
 	if( "enable" == current_status ){
-	    fill( 255, 0, 0 );
+	    fill( 30, 171, 221 );
 	    rect( 30, stageHeight - 160, image_margine * ( 100 - charge ) * 0.01 , 120 );
     }
 	
