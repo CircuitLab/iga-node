@@ -29,13 +29,13 @@ set :default_environment, {
 
 namespace :deploy do
   task :start, :roles => :app do
-    sudo "#{process_env} forever start #{current_path}/app.js"
+    run "#{sudo} #{process_env} forever start #{current_path}/app.js"
   end
   task :stop, :roles => :app do
-    sudo "forever stop #{current_path}/app.js"
+    run "#{sudo} forever stop #{current_path}/app.js"
   end
   task :restart, :roles => :app, :except => { :no_release => true } do
-    sudo "#{process_env} forever restart #{current_path}/app.js"
+    run "#{sudo} #{process_env} forever restart #{current_path}/app.js"
   end
 end
 
