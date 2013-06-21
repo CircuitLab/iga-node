@@ -1,39 +1,44 @@
-default_run_options[:pty] = true
-ssh_options[:forward_agent] = true
-set :application, "smartphonebomb"
-set :repository, "git@github.com:uniba/DieHard.git"
+
+set :application, "iga-node"
+set :repository,  "git@github.com:CircuitLab/#{application}.git"
+
+set :user, 'deployer'
+set :use_sudo, false
+set :deploy_to, "/home/#{user}/apps/#{application}"
+
 set :scm, :git
-set :branch, "server"
 set :scm_verbose, true
 set :deploy_via, :remote_cache
-set :deploy_to, "/home/deploy/app/#{application}"
-set :node_env, 'production'
-#set :node_port, 8888
-set :user, "deploy"
-set :group, "wheel"
+set :git_shallow_clone, 1
 
-role :web, "ec2-23-21-38-54.compute-1.amazonaws.com"                          # Your HTTP server, Apache/etc
-role :app, "ec2-23-21-38-54.compute-1.amazonaws.com"                          # This may be the same as your `Web` server
-role :db,  "ec2-23-21-38-54.compute-1.amazonaws.com", :primary => true # This is where Rails migrations will run
-role :db,  "ec2-23-21-38-54.compute-1.amazonaws.com"
+set :node_env, "production"
+# set :node_port, 80
+set :node_port, 8080
+set :process_uid, user
+set :process_env, "NODE_ENV=#{node_env} PORT=#{node_port} UID=#{process_uid}"
 
-set :use_sudo, false
+role :app, 'ec2-54-250-90-29.ap-northeast-1.compute.amazonaws.com'
 
-current_app_path = "#{current_path}/server"
-#ここで起動スクリプトをかく。
+default_run_options[:pty] = true
+ssh_options[:forward_agent] = true
+
+set :default_environment, {
+  'PATH' => "~/.nodebrew/current/bin:$PATH"
+}
+
 namespace :deploy do
   task :start, :roles => :app do
-      run "cd #{current_app_path } && NODE_ENV=#{node_env} forever start app.js"
+    sudo "#{process_env} forever start #{current_path}/app.js"
   end
   task :stop, :roles => :app do
-       run "cd #{current_app_path } && forever stop app.js"
+    sudo "forever stop #{current_path}/app.js"
   end
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_app_path } &&  NODE_ENV=#{node_env} forever restart app.js"
-  end
-  task :npm_install, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_app_path} && npm install"
+    sudo "#{process_env} forever restart #{current_path}/app.js"
   end
 end
 
-after 'deploy:create_symlink', 'deploy:npm_install'
+after "deploy:create_symlink", :roles => :app do
+  run "ln -svf #{shared_path}/node_modules #{current_path}/node_modules"
+  run "cd #{current_path} && npm i"
+end
