@@ -1,0 +1,56 @@
+extends layout
+
+block content
+  script(src='/javascripts/admin.js')
+  h1 admin of #{title}
+
+  #componet
+    h4 online:
+    #online online:
+
+  #componet
+    h4 detonator on/off:
+    #section
+      input(type='radio', name='mode', value='standby', checked='checked')
+      label standby
+   
+    #section
+      input(type='radio', name='mode', value='ready')
+      label ready
+    #section
+      input(type='radio', name='mode', value='test') 
+      label test
+    #section
+      input(type='radio', name='mode', value='on') 
+      label on
+  
+  #componet 
+    a.randosc(href='#') submit OSC (random from sever): 
+      #section
+        input.range01(type='range', min='0', max='50', step='1', value='0')
+        span.showRangeArea 0
+   
+  #componet
+    a.randunity(href='#') submit OSC (random in utniy): 
+      #section
+        input.range02(type='range', min='0', max='50', step='1', value='0')
+        span.showRangeArea2 0
+   
+   
+  #componet
+    h4 status enable/disable:
+    
+    #section
+      input.status_enable(type='button', name='status_enable', value='enable')
+      input.status_disable(type='button', name='status_disable', value='disable')
+      span.showStatusArea
+     
+  #componet
+    h4 charge_speed:
+
+    #section
+      input.charge_speed_range(type='range', min='2', max='1000', step='1', value='100')
+      label charge_speed : 
+      input.submit_speed(type='button', name='submit_speed', value='submit charge_speed')
+      span.showCharge_speedArea 100 ms
+

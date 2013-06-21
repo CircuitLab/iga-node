@@ -1,0 +1,42 @@
+body {
+	margin: 0px;
+	background-color: #000000;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#componet {
+	background-color: #cccccc;
+	padding: 10px;
+	margin: 10px;
+  color: #000000;
+}
+
+#section {
+	padding: 10px;
+  color: #000000;
+}
+
+#user 	{
+	visibility:hidden;
+}
+
+#content_wrapper{
+	width:100%;
+}
+
+#btn_box {
+	width: 90%;
+	margin:0 auto;
+}
+
+#tw_btn {
+	margin: 20px;
+}
+
+#fb_btn {
+	margin: 20px;
+}

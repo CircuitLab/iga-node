@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  script(src='/javascripts/vendor/processing.min.js')
+  script(src='/javascripts/vendor/jquery-processing.js')
+  script(src='/javascripts/app.js')
+  script(src='http://connect.facebook.net/en_US/all.js')
+  #user(data-user=JSON.stringify(user))
+  //#fb-root
+  #wrapper
+    //#header
+      //#message
+    #content
+      canvas#bomb(data-processing-sources='/scketch/scketch.pde')
+      //input.postTW(type='button', name='postTW', value='post to Twitter')
+      //input.postFB(type='button', name='postFB', value='post to Facebook')
+      //p#msg
