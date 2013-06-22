@@ -10,15 +10,16 @@ set :deploy_to, "/home/#{user}/apps/#{application}"
 set :scm, :git
 set :scm_verbose, true
 set :deploy_via, :remote_cache
+# set :deploy_via, :copy
 set :git_shallow_clone, 1
 
 set :node_env, "production"
-# set :node_port, 80
-set :node_port, 8080
+set :node_port, 80
+# set :node_port, 8080
 set :process_uid, user
 set :process_env, "NODE_ENV=#{node_env} PORT=#{node_port} UID=#{process_uid}"
 
-role :app, 'ec2-54-250-90-29.ap-northeast-1.compute.amazonaws.com'
+role :app, '54.250.121.165'
 
 default_run_options[:pty] = true
 ssh_options[:forward_agent] = true
@@ -42,4 +43,8 @@ end
 after "deploy:create_symlink", :roles => :app do
   run "ln -svf #{shared_path}/node_modules #{current_path}/node_modules"
   run "cd #{current_path} && npm i"
+end
+
+after "deploy:setup", :roles => :app do
+  run "mkdir -pv #{shared_path}/node_modules"
 end
