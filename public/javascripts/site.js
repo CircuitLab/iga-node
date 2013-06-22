@@ -11,11 +11,8 @@ $(document).ready(function() {
     if (!ready) return false;
 
     socket.emit('shake', user.id);
-    
     ready = false;
-    setTimeout(function() {
-      ready = true;
-    }, duration);
+    setTimeout(function() { ready = true }, duration);
   }, false);
 
   $(window).on('unload', function() {

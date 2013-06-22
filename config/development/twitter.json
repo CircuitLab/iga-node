@@ -1,5 +1,5 @@
 {
   "consumerKey": "kmiPJOIco0RI5WA6oDOmQ",
   "consumerSecret": "57yaZi1garPxtwd8GzEenEwltITIzgXbeecxIOqA",
-  "callbackURL": "http://localhost:3000/auth/twitter/callback"
+  "callbackURL": "http://sei.local:3000/auth/twitter/callback"
 }

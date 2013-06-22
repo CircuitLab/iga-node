@@ -54,18 +54,22 @@ if ('development' == app.get('env')) {
 io.sockets.on('connection', function(socket) {
 
   socket.on('enter', function(user) {
+    console.log('enter!');
     User.enter(socket, user);
   });
 
   socket.on('shake', function(user_id) {
+    console.log('shake!');
     User.shake(socket, user_id);
   });
 
   socket.on('leave', function() {
+    console.log('leave!');
     User.leave(socket);
   });
 
   socket.on('disconnect', function() {
+    console.log('disconnect!');
     User.leave(socket);
   })
 });

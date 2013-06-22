@@ -1,7 +1,7 @@
 
 set :application, "iga-node"
 set :repository,  "git@github.com:CircuitLab/#{application}.git"
-set :branch, "master"
+set :branch, "gte-0.10.0"
 
 set :user, "deployer"
 set :use_sudo, false

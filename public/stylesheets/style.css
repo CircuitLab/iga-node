@@ -28,13 +28,29 @@ a {
   color: #000000;
 }
 
+#content {
+
+}
+
 #content_wrapper{
   width:100%;
 }
 
+#content {
+  vertical-align: middle;
+  padding-top: 50%;
+}
+
 #btn_box {
+  height: 100%;
   width: 90%;
-  margin:0 auto;
+  margin: 0 auto;
+}
+
+p.connect {
+  color: #ffffff;
+  text-align: center;
+  font-size: 48px;
 }
 
 #tw_btn {

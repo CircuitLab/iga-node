@@ -12,6 +12,7 @@
     "passport": "~0.1.17",
     "passport-twitter": "~0.1.5",
     "request": "~2.21.0",
-    "mime": "~1.2.9"
+    "mime": "~1.2.9",
+    "osc-min": "0.0.9"
   }
 }
