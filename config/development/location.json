@@ -1,4 +1,4 @@
 {
   "hostname": "sei.local",
-  "profile_images": "http://sei.local:3000/images/profiles/"
+  "profile_images": "http://localhost:3000/images/profiles/"
 }

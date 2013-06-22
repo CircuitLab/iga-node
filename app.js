@@ -11,11 +11,12 @@ var express = require('express')
   , TwitterStrategy = require('passport-twitter').Strategy
   , twitterCredits = require('./config').twitter
   , routes = require('./routes')
-  , User = require('./lib/user');
+  , GameMaster = require('./lib/game_master');
 
 var app = express()
   , server = http.createServer(app)
-  , io = sio.listen(server);
+  , io = sio.listen(server)
+  , gameMaster = new GameMaster(io);
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -51,27 +52,31 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-io.sockets.on('connection', function(socket) {
+io.of('/player').on('connection', function(socket) {
 
   socket.on('enter', function(user) {
-    console.log('enter!');
-    User.enter(socket, user);
+    gameMaster.welcomePlayer(socket, user);
   });
 
   socket.on('shake', function(user_id) {
-    console.log('shake!');
-    User.shake(socket, user_id);
+    gameMaster.throwDetonator(socket, user_id);
   });
 
   socket.on('leave', function() {
-    console.log('leave!');
-    User.leave(socket);
+    gameMaster.farewellPlayer(socket);
   });
 
   socket.on('disconnect', function() {
-    console.log('disconnect!');
-    User.leave(socket);
-  })
+    gameMaster.farewellPlayer(socket);
+  });
+});
+
+io.of('/game').on('connection', function(socket) {
+  gameMaster.createGame(socket);
+
+  socket.on('disconnect', function() {
+    gameMaster.destroyGame(socket);
+  });
 });
 
 app.get('/', routes.index);
