@@ -53,6 +53,13 @@ p.connect {
   font-size: 48px;
 }
 
+p.thank-you {
+  color: #ffffff;
+  text-align: center;
+  font-size: 92px;
+  display: none;
+}
+
 #tw_btn {
   margin: 20px;
 }

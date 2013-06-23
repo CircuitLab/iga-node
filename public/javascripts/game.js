@@ -15,22 +15,20 @@ $(document).ready(function() {
   // }, 20000);
 
   socket.on('enter', function(id, profile_image) {
-    console.log('enter');
-    console.log(id);
-    console.log(profile_image);
     u.getUnity().SendMessage('OSCcontroller', 'oscEnter', id + '&' + profile_image);
   });
 
   socket.on('shake', function(id) {
-    console.log('shake');
-    console.log(id);
     u.getUnity().SendMessage('OSCcontroller', 'shakeDetonator', id);
   });
 
   socket.on('leave', function(id) {
-    console.log('leave');
-    console.log(id);
     u.getUnity().SendMessage('OSCcontroller', 'leavePlayer', id);
   });
+
+  window.ThankYou = function() {
+    console.log('Thank You!');
+    socket.emit('thank');
+  };
 
 });

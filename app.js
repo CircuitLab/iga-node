@@ -74,6 +74,10 @@ io.of('/player').on('connection', function(socket) {
 io.of('/game').on('connection', function(socket) {
   gameMaster.createGame(socket);
 
+  socket.on('thank', function() {
+    gameMaster.thankYou();
+  });
+
   socket.on('disconnect', function() {
     gameMaster.destroyGame(socket);
   });

@@ -7,6 +7,13 @@ $(document).ready(function() {
 
   socket.emit('enter', user);
 
+  socket.on('thank', function() {
+    console.log('Thank you!');
+    socket.disconnect();
+    $('.shake-to-throw').hide();
+    $('.thank-you').show();
+  });
+
   window.addEventListener('shake', function(e) {
     if (!ready) return false;
 
